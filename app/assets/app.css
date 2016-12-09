@@ -197,6 +197,7 @@ md-toolbar h1 {
   margin-bottom: 1.25em;
   color: #212121;
   position: relative;
+  outline: none;
 }
 .task-in{
   position: relative;
@@ -319,7 +320,7 @@ md-backdrop{position: fixed;}
 }
 
 .md-sidenav-right{
-  width: 31.25em; max-width: 31.25em;
+  width: 100%; max-width: 31.25em;
 }
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   background: none;

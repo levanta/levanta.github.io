@@ -41,7 +41,7 @@ function UsersDataService($q) {
   ];
   data.account = {
       "username": "Trevor Reyes",
-      "image_url": "/assets/images/photo.png"
+      "image_url": "./assets/images/photo.png"
   };
 
   // Promise-based API

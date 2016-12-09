@@ -49,8 +49,7 @@ class TasksListController  {
    */
   getTasksList($http) {
     // var project_id = this.selected ? this.selected.id : '';
-    var project_id = this.selected ? 2 : '';
-    var url = '/src/users/components/tasks/items.json?project_id='
+    var url = './src/users/components/tasks/items.json?project_id='
     if (this.bool) {
         this.bool = false;
         $http.get(url).then(angular.bind(this, function (obj) {
@@ -75,7 +74,6 @@ class TasksListController  {
             }
             this.items = this.items.concat(this.dateArray);
             this.bool = true
-            this.project_id = 2
         }));
     }
   }
