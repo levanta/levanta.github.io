@@ -1,4 +1,4 @@
-class UserDetailsController  {
+class UserListController  {
 
   /**
    * Constructor
@@ -6,10 +6,8 @@ class UserDetailsController  {
    * @param $mdBottomSheet
    * @param $log
    */
-  constructor($timeout, $mdSidenav, $mdUtil, $log) {
+  constructor($mdSidenav, $mdUtil, $log, $rootScope) {
     this.toggleRight = buildToggler('right');
-    this.toggleNewtask = buildToggler('newtask');
-    this.toggleAddTask = buildToggler('addtask');
     function buildToggler(navID) {
       var debounceFn =  $mdUtil.debounce(function(){
             $mdSidenav(navID)
@@ -21,8 +19,10 @@ class UserDetailsController  {
 
       return debounceFn;
     }
+    this.showTasks = function () {
+      $rootScope.$broadcast('childEvent', {message: 'Hello from Ctrl 3'});
+    };
   }
-
 }
-export default UserDetailsController;
+export default UserListController;
 

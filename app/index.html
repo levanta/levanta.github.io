@@ -14,15 +14,6 @@
 
 <body ng-cloak layout="column" ng-controller="AppController as app">
 
-  <!-- Container #1 (see wireframe) -->
-  <md-toolbar layout="row" class="md-toolbar-tools">
-    <md-button class="menu md-icon-button" hide-gt-sm ng-click="app.toggleList()"
-               aria-label="Show User List">
-      <md-icon md-svg-icon="menu"></md-icon>
-    </md-button>
-    <h1>Angular Material - Starter App</h1>
-  </md-toolbar>
-
   <!-- Container #2 -->
   <div flex layout="row">
 
@@ -31,6 +22,7 @@
                 md-component-id="left" ng-click="app.toggleList()">
       <!-- Custom UsersList component -->
       <users-list
+          account="app.account"
           users="app.users"
           selected="app.selected"
           on-selected="app.selectUser(user)">
@@ -41,8 +33,15 @@
     <md-content flex id="content">
       <!-- Custom UserDetails component -->
       <user-details
-          selected="app.selected" >
+          selected="app.selected">
       </user-details>
+      <search selected="app.selected" >
+        </search>
+
+      <div class="menu md-icon-button" hide-gt-sm ng-click="app.toggleList()">
+      </div>
+      <tasks-list
+            selected="app.selected" id="tasks"></tasks-list>
     </md-content>
 
   </div>
@@ -54,6 +53,5 @@
         .import('src/boot/boot')
         .catch( console.error.bind(console) ); // make sure any errors print to console
   </script>
-
 </body>
 </html>

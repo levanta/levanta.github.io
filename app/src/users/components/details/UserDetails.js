@@ -5,6 +5,6 @@ export default {
   config : {
     bindings         : {  selected: '<' },
     templateUrl      : 'src/users/components/details/UserDetails.html',
-    controller       : [ '$mdBottomSheet', '$log', UserDetailsController ]
+    controller       : [ '$mdBottomSheet','$mdSidenav', '$mdUtil', '$log', UserDetailsController ]
   }
 };

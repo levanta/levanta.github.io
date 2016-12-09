@@ -1,7 +1,57 @@
-<md-icon md-svg-icon="{{$ctrl.selected.avatar}}" class="avatar"></md-icon>
-<h2>{{$ctrl.selected.name}}</h2>
-<p>{{$ctrl.selected.content}}</p>
-
-<md-button class="md-fab md-fab-bottom-right" ng-click="$ctrl.share($event)" aria-label="Share">
-  <md-icon md-svg-icon="share" ></md-icon>
+<md-button class="md-fab md-fab-bottom-right fixed-btn"     ng-click="$ctrl.toggleNewtask()">
 </md-button>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right" md-is-locked-open="lock && $mdMedia('gt-md')">
+
+  <md-toolbar class="md-theme-light">
+    <div class="title">Create new project</div>
+    <div  ng-click="$ctrl.toggleRight()" class="close"></div>
+  </md-toolbar>
+  <md-content>
+    <form>
+      <md-input-container>
+        <label for="testInput">Project name</label>
+        <input type="text" id="testInput" ng-model="data" md-sidenav-focus="">
+      </md-input-container>
+    </form>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleRight()"></md-button>
+  </md-content>
+
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="newtask" md-is-locked-open="lock && $mdMedia('gt-md')">
+
+  <md-toolbar class="md-theme-light">
+    <div class="title">Create new task</div>
+    <div  ng-click="$ctrl.toggleNewtask()" class="close"></div>
+  </md-toolbar>
+  <md-content>
+    <form>
+      <md-input-container>
+        <label for="testInput">Task name</label>
+        <input type="text" id="testInput" ng-model="data" md-sidenav-focus="">
+      </md-input-container>
+      <md-input-container>
+        <label for="testInput">Description</label>
+        <input type="text" id="testInput" ng-model="data" md-sidenav-focus="">
+      </md-input-container>
+    </form>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleNewtask()"></md-button>
+  </md-content>
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="addtask" md-is-locked-open="lock && $mdMedia('gt-md')">
+  <md-toolbar class="md-theme-light">
+    <div class="title">Call in barber shop</div>
+    <div  ng-click="$ctrl.toggleAddTask()" class="close"></div>
+    <div class="edite"></div>
+    <div class="delete"></div>
+  </md-toolbar>
+  <md-content>
+    <div class="text">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleAddTask()"></md-button>
+  </md-content>
+
+</md-sidenav>

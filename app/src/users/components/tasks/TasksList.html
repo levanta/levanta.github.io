@@ -1,0 +1,13 @@
+<div class="firstPage" ng-show="!$ctrl.myValue" flex>
+  <div layout="column" layout-align="center center">&#xf10b;<span>Have a good day</span></div>
+</div>
+<div ng-repeat="item in $ctrl.items track by $index"
+         class="repeated-item task-wrap" flex ng-show="$ctrl.myValue">
+    <div class="task-date">
+    	{{item.time| date:  'EEEE '}}
+    	<span>{{item.time| date:  '(dd.MM.yyyy)'}}</span>
+    </div>
+    <div class="task" ng-click="$ctrl.toggleAddTask()">
+    	<div ng-repeat="i in item.data" class="task-in"><span class="task-del"></span>{{i.title}}</div>
+    </div>
+</div>
