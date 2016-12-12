@@ -6,7 +6,7 @@ export default {
   name : 'dropdownMenu',
   config : {
     bindings         : {  users: '<', selected : '<'},
-    templateUrl      : 'src/users/components/dropdown/dropdownMenu.html',
+    templateUrl      : 'src/users/components/dropdown/DropdownMenu.html',
     controller       : [ '$mdDialog', '$rootScope', '$scope', DropdownMenuController ]
   }
 };
