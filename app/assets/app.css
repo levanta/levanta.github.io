@@ -37,7 +37,7 @@
 }
 
 html, body {
-  font-family: 'SFUIText', 'Roboto', sans-serif;
+  font-family: 'SFUIText', sans-serif;
   font-size: 16px;
   height: 100%;
   margin: 0px;
@@ -68,7 +68,7 @@ md-toolbar h1 {
   outline: none;
 }
 md-sidenav{
-  background: #292c33; width: 21.2em; color: #fff; 
+  background: #292c33; max-width: 21.2em; width:100%; color: #fff; 
 }
 md-list-item, md-list-item .md-list-item-inner,
 md-list-item::before, md-list-item .md-list-item-inner::before{min-height: 38px;}
@@ -93,6 +93,7 @@ md-list .md-button {
   position: relative;
   font-size: .9em;
 }
+md-list .md-button.selected {background-color: rgba(107, 107, 153, 1);}
 md-list .md-button span.col,
 md-list span.proj-col {
   position: absolute; top: 50%; right: 0.9em;  margin-top: -.45em;
@@ -107,12 +108,7 @@ md-list span.proj-col:after{
   font-size: 1.5em;
 }
 /* Primary content area */
-
-#content {
-  overflow: auto;
-}
-
-#content .md-button.share {
+.content .md-button.share {
   background-color: transparent;
   border: none;
   width: 48px;
@@ -123,7 +119,7 @@ md-list span.proj-col:after{
   right: 25px;
 }
 
-#content .md-button.share > md-icon {
+.content .md-button.share > md-icon {
   fill: black;
   width: 36px;
   height: 36px;
@@ -135,14 +131,14 @@ md-button.menuBtn > md-icon {
   height: 24px;
 }
 
-#content .md-button.share:active > md-icon {
+.content .md-button.share:active > md-icon {
   background-color: #dadada;
   border-radius: 75%;
   padding: 4px;
   transition: all 100ms ease-out 30ms;
 }
 
-#content img {
+.content img {
   display: block;
   height: auto;
   max-width: 500px;
@@ -218,6 +214,7 @@ md-toolbar h1 {
   padding: 0 .56em;
   margin-bottom: .4em;
   color: #b3bbcb;
+  margin-top: 1.25em;
 }
 .task-date span{
   font-size: 80%;
@@ -230,18 +227,11 @@ md-toolbar h1 {
   cursor: pointer;
 }
 
-search {
-  position: relative; z-index: 1;
-  display: block;
-  width: 100%;
-  height: 3.1em;
-  border-bottom: 1px solid #bdbdbd;
-  margin-bottom: 1.25em;
-}
 search input{
-  color: #bdbdbd;
-  font-size: 1.7em;
-  padding: 0.9em 1em;
+  color: #333;
+  font-size: .9em;
+  padding: 1.8em 5em 1.8em 2em;
+    font-family: SFUITextRegular; 
   position: relative;
   border:none; 
   width: 100%;
@@ -264,7 +254,7 @@ search label{
   color: #b3bbcb;
   height: 1.4em; line-height: 1.4em
 }
-search form.focused label{
+search .focused label, search .empty label{
   opacity: 0;
 }
 
@@ -303,7 +293,7 @@ md-backdrop{position: fixed;}
   font-size: 24px;
 }
 .firstPage>div{
-  height: 100%; min-height: 330px;
+  height: 100%; min-height: 270px;
 }
 .md-button.md-default-theme.md-fab:not([disabled]).md-focused, .md-button.md-fab:not([disabled]).md-focused, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover{
   background: #585895;
@@ -328,6 +318,15 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   font-size: 1.1em;
   padding: 1.7em 0 0;
   font-family: SFUITextMedium; 
+}
+md-toolbar .title input{
+  background: none;
+  font-size: 1.1em;
+  font-family: SFUITextMedium; 
+  border: none;
+  text-align: center;
+  outline: none;
+  color: rgba(255,255,255,0.87);
 }
 md-toolbar .close{
   position: absolute; top: 1.2em; left: .8em;
@@ -382,3 +381,47 @@ md-input-container{
 .md-button.md-fab.ok:after{content: "\f103"}
 md-input-container .md-errors-spacer{display: none;}
 .text{width: 69%; margin: 0 auto; line-height: 180%; color: #dbdbdb; font-family: SFUITextRegular; font-size:.75em; padding-top: 1.5em;}
+
+
+
+.content{
+  display: flex;
+  flex-direction: column;            
+  height: 100vh;  
+  width: 100%;
+  overflow: hidden;
+}
+search {
+  position: relative; z-index: 1;
+  width: 100%;
+  height: 3.1em;
+  border-bottom: 1px solid #bdbdbd;
+  background: #f7f7f7;
+  flex: 0 0 auto;  
+}
+#content{
+  flex: 1 1 auto;     
+  overflow-y: auto;     
+  position: relative;
+}
+.md-button{white-space: normal;}
+.md-open-menu-container{
+    margin-top: 2.7em;
+    margin-left: .5em;
+}
+md-menu-content{padding: 1em 0; background: #f7f7f7;border:1px solid #bdbdbd; border-top: none;}
+md-icon{height: auto;}
+md-menu-item > .md-button md-icon:after{
+  font-family: "Test--front-end";
+  content: "\f106"; 
+  font-size: 1em;
+}
+md-menu-item > .md-button.md-focused md-icon:after,
+md-menu-item > .md-button:hover md-icon:after{color: #fff;}
+.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused, .md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover{
+  background: #6b6b99; color: #fff;
+}
+md-menu-item .md-button{
+  margin: 0 .5em;
+  border-radius: 3px;
+}

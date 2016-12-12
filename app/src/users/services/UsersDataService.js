@@ -6,50 +6,14 @@
  * @returns {{loadAll: Function}}
  * @constructor
  */
-function UsersDataService($q) {
-  var data = {};
-  data.users = [
-    {
-        "id": 1,
-        "title": "Private",
-        "task_count": 8
-    },
-    {
-        "id": 2,
-        "title": "Decode",
-        "task_count": 25
-    },
-    {
-        "id": 3,
-        "title": "Family",
-        "task_count": 3
-    },
-    {
-        "id": 4,
-        "title": "Cookle",
-        "task_count": 13
-    }
-  ];
-  data.tasks = [
-    {
-      "Task": {
-        "id": 123,
-        "title": "Some project",
-        "created_at": "2016-31-12 12:59:59"
-      }
-    }
-  ];
-  data.account = {
-      "username": "Trevor Reyes",
-      "image_url": "./assets/images/photo.png"
-  };
-
-  // Promise-based API
+function UsersDataService($q, $cookies, $http) {
   return {
-    loadAllUsers: function() {
-      return $q.when(data);
+
+    loadUser: function(session) {
+      var accountUrl = 'https://api-test-task.decodeapps.io/account?session=' + session
+      return $http.get(accountUrl);
     }
   };
 }
-export default ['$q', UsersDataService];
+export default ['$q', '$cookies', '$http', UsersDataService];
 

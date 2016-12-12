@@ -5,6 +5,6 @@ export default {
   config : {
     bindings         : {  selected: '<' },
     templateUrl      : 'src/users/components/search/Search.html',
-    controller       : [ '$http', SearchController ]
+    controller       : [ '$rootScope',  SearchController ]
   }
 };

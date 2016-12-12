@@ -5,6 +5,6 @@ export default {
   config : {
     bindings         : {  selected: '<' },
     templateUrl      : 'src/users/components/tasks/TasksList.html',
-    controller       : [ '$http','$scope','$mdSidenav', '$mdUtil', '$log', TasksListController ]
+    controller       : [ '$http','$scope','$mdSidenav', '$mdUtil', '$rootScope', '$cookies', '$log', TasksListController]
   }
 };

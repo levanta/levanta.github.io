@@ -1,13 +1,17 @@
-<div class="firstPage" ng-show="!$ctrl.myValue" flex>
+<div class="firstPage" ng-show="!$ctrl.hasTasks" flex>
   <div layout="column" layout-align="center center">&#xf10b;<span>Have a good day</span></div>
 </div>
-<div ng-repeat="item in $ctrl.items track by $index"
-         class="repeated-item task-wrap" flex ng-show="$ctrl.myValue">
+<div class="firstPage" ng-show="$ctrl.noResults" flex>
+  <div layout="column" layout-align="center center"><span>Nothing is found. Select a Project </span></div>
+</div>
+<div ng-repeat="item in $ctrl.items"
+         class="repeated-item task-wrap" flex ng-show="$ctrl.hasTasks">
     <div class="task-date">
     	{{item.time| date:  'EEEE '}}
     	<span>{{item.time| date:  '(dd.MM.yyyy)'}}</span>
     </div>
-    <div class="task" ng-click="$ctrl.toggleAddTask()">
-    	<div ng-repeat="i in item.data" class="task-in"><span class="task-del"></span>{{i.title}}</div>
+    <div class="task">
+    	<div ng-repeat="i in item.data" class="task-in"><span class="task-del" ng-click="$ctrl.deleteTask(i.id)"></span>{{i.title}}</div>
     </div>
 </div>
+<md-button class="md-fab md-fab-bottom-right fixed-btn" ng-click="$ctrl.toggleNewTask()" ng-show="$ctrl.selected"></md-button>

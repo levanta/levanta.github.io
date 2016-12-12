@@ -4,7 +4,7 @@
  * @param $mdSidenav
  * @constructor
  */
-function AppController(UsersDataService, $mdSidenav, $http, $scope) {
+function AppController(UsersDataService, ProjectsDataService, LoginService, $mdSidenav,  $rootScope) {
   var self = this;
 
   self.selected     = null;
@@ -12,16 +12,23 @@ function AppController(UsersDataService, $mdSidenav, $http, $scope) {
   self.selectUser   = selectUser;
   self.toggleList   = toggleUsersList;
   self.account      = null;
+  self.hideProgress = false;
 
-  // Load all registered users
 
-  UsersDataService
-        .loadAllUsers()
-        .then( function( data) {
-          self.users    = [].concat(data.users);
-          self.selected = data[0];
-          self.account  = data.account;
-        });
+  LoginService.login()
+    .then(function(session) {
+      return ProjectsDataService.loadProjects(session)
+    }).then( function( d) {
+        var account = d.account.data,
+          projects = d.projects.data,
+          proj = {};
+        self.account  = account.Account;
+        for ( var i=0; i<projects.projects.length; i++ ) {
+          proj[i] = projects.projects[i].Project
+        }
+        self.users  = proj;
+        self.hideProgress = true;
+      })
   // *********************************
   // Internal methods
   // *********************************
@@ -39,7 +46,8 @@ function AppController(UsersDataService, $mdSidenav, $http, $scope) {
    */
   function selectUser ( user ) {
     self.selected = angular.isNumber(user) ? $scope.users[user] : user;
+    $rootScope.$broadcast('childEvent', self.selected);
   }
 }
 
-export default [ 'UsersDataService', '$mdSidenav',  AppController ];
+export default [ 'UsersDataService', 'ProjectsDataService', 'LoginService', '$mdSidenav', '$rootScope', AppController ];
