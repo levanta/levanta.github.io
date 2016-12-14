@@ -1,10 +1,14 @@
 <md-menu md-position-mode="target-right target" ng-show="$ctrl.selected">
   <div class="menu md-icon-button" ng-click="$ctrl.openMenu($mdMenu, $event)" ></div>
-  <md-menu-content width="4">
+  <md-menu-content width="3">
     <md-menu-item>
       <md-button ng-click="$ctrl.redial()">
-        <md-icon md-menu-align-target></md-icon>
-        Edit 
+        <div layout="row" flex>Edit </div>
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="$ctrl.delete();">
+        <div layout="row" flex>Delete </div>
       </md-button>
     </md-menu-item>
   </md-menu-content>

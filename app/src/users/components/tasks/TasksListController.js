@@ -18,6 +18,7 @@ class TasksListController  {
     this.paging_size = 5;
     this.searchString = '';
     this.noResults = false;
+    this.firstPage = true;
     this.hasScrollBar = function() {
         return angular.element(document.getElementById('content'))[0].scrollHeight > angular.element(document.getElementById('content'))[0].offsetHeight;
     };
@@ -27,6 +28,7 @@ class TasksListController  {
       self.dateArray = [];
       self.items = [];
       self.bool = true; 
+      self.firstPage = false;
       if(proj.task_count > 0){
         self.getTasksList($http, proj, self.searchString);
         self.hasTasks = true;
@@ -36,6 +38,9 @@ class TasksListController  {
     })
     this.toggleNewTask = function () {
       $rootScope.$broadcast('newTask', this.selected);
+    };
+    this.editTask = function (task) {
+      $rootScope.$broadcast('editTask', task);
     };
     this.deleteTask = function(taskId) {
       var url = 'https://api-test-task.decodeapps.io/tasks/task',
@@ -53,6 +58,27 @@ class TasksListController  {
       }
       if (this.items.length === 0) this.hasTasks = false;
     }
+    this.updateTask = function(task, newTitle, newDescription) {
+      var url = 'https://api-test-task.decodeapps.io/tasks/task',
+        params = {session:this.session, 'Task' : {"id":task.id, "title":newTitle,"description": newDescription}}
+      $http.post(url, params).then(angular.bind(this, function (d) {
+        for(var o in this.items){
+          for(var i in this.items[o].data){
+            if(this.items[o].data[i].id === task.id ){
+              this.items[o].data[i].title = newTitle;
+              this.items[o].data[i].description = newDescription;
+            }
+              
+          }
+        }
+      }));
+    }
+    $scope.$on('delTask', angular.bind(this, function(event, task){ 
+      this.deleteTask(task.id)
+    }));
+    $scope.$on('updateTask', angular.bind(this, function(event, task, newTitle, newDescription){ 
+      this.updateTask(task, newTitle, newDescription)
+    }));
 
     $scope.$on('createTask', angular.bind(this, function(event, taskName, description){ 
       this.hasTasks = true;

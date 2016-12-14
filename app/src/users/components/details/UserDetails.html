@@ -37,18 +37,58 @@
   </md-content>
 </md-sidenav>
 
+
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="editProj" md-is-locked-open="lock && $mdMedia('gt-md')">
+
   <md-toolbar class="md-theme-light">
-    <div class="title"><input ng-model="$ctrl.projTitle" ng-value="$ctrl.selected.title" ng-readonly="$ctrl.readonly" id="projName"></div>
+    <div class="title">Edit project</div>
     <div  ng-click="$ctrl.toggleEditProj()" class="close"></div>
-    <div class="edite" ng-click="$ctrl.editProject($ctrl.selected)"></div>
-    <div class="delete"  ng-click="$ctrl.deleteProject($ctrl.selected, $ctrl.users); $ctrl.toggleEditProj();"></div>
   </md-toolbar>
   <md-content>
-    <div class="text">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
+    <form>
+      <md-input-container>
+        <label for="testInput">Project name</label>
+        <input ng-model="$ctrl.projTitle" ng-value="$ctrl.selected.title" md-sidenav-focus="">
+      </md-input-container>
+    </form>
     <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleEditProj(); $ctrl.updateProj($ctrl.selected);"></md-button>
   </md-content>
 
+</md-sidenav>
+
+
+<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="editTask" md-is-locked-open="lock && $mdMedia('gt-md')">
+  <md-toolbar class="md-theme-light">
+    <div class="title"><input ng-model="$ctrl.taskName" ng-value="$ctrl.taskName" ng-readonly="$ctrl.readonly" id="taskTitle"></div>
+    <div  ng-click="$ctrl.toggleEditTask()" class="close"></div>
+    <div class="edite" ng-click="$ctrl.focusTask()"></div>
+    <div class="delete"  ng-click="$ctrl.delTask(); $ctrl.toggleEditTask();"></div>
+  </md-toolbar>
+  <md-content>
+    <div class="text">
+      <textarea ng-model="$ctrl.description" ng-value="$ctrl.description" ng-readonly="$ctrl.readonly">{{$ctrl.description}}</textarea>
+    </div>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleEditTask(); $ctrl.updateTask();"></md-button>
+  </md-content>
+</md-sidenav> -->
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="editTask" md-is-locked-open="lock && $mdMedia('gt-md')">
+  <md-toolbar class="md-theme-light">
+    <div class="title">Edit task</div>
+    <div  ng-click="$ctrl.toggleEditTask()" class="close"></div>
+    <div class="delete"  ng-click="$ctrl.delTask(); $ctrl.toggleEditTask();"></div>
+  </md-toolbar>
+  <md-content>
+    <form>
+      <md-input-container>
+        <label for="testInput">Task name</label>
+        <input type="text" ng-model="$ctrl.taskName" ng-value="$ctrl.taskName" md-sidenav-focus="">
+      </md-input-container>
+      <md-input-container>
+        <label for="testInput">Description</label>
+        <input type="text" ng-model="$ctrl.description" ng-value="$ctrl.description" >
+      </md-input-container>
+    </form>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok" ng-click="$ctrl.toggleEditTask(); $ctrl.updateTask();"></md-button>
+  </md-content>
 </md-sidenav>

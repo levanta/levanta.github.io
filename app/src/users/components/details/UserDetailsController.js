@@ -10,6 +10,7 @@ class UserDetailsController  {
     this.toggleNewProj = buildToggler('newProj');
     this.toggleNewTask = buildToggler('newTask');
     this.toggleEditProj = buildToggler('editProj');
+    this.toggleEditTask = buildToggler('editTask');
     this.taskName = "";
     this.description = "";
     this.session =  $cookies.get('session');
@@ -18,9 +19,10 @@ class UserDetailsController  {
     this.projectName = "";
     this.readonly = true;
     this.projTitle = "";
+    this.task = {};
     var self = this;
     this.createTask = function(){
-      this.taskName && $rootScope.$broadcast('createTask', this.taskName, this.description);
+      this.taskName.length !==0 && this.taskName!=='' && $rootScope.$broadcast('createTask', this.taskName, this.description);
       this.taskName = "";
       this.description = "";
     }
@@ -43,7 +45,7 @@ class UserDetailsController  {
       this.projectName && saveProject();
     }
 
-    this.deleteProject = function(selected, projectList){
+    $scope.$on('deleteProject', function(event, selected, projectList){
       var deleteProjUrl = 'https://api-test-task.decodeapps.io/projects/project';
       var title = self.projectName;
       var params = {
@@ -58,13 +60,7 @@ class UserDetailsController  {
         }
         $rootScope.$broadcast('hideBtn');
       });
-    }
-
-    this.editProject = function(selected){
-      self.readonly = false;
-      var element = angular.element(document.getElementById('projName'))[0];
-      element.focus();
-    }
+    })
 
     this.updateProj = function(selected){
       var updateProjUrl = 'https://api-test-task.decodeapps.io/projects/project';
@@ -94,12 +90,33 @@ class UserDetailsController  {
       self.toggleNewProj();
     })
     $scope.$on('newTask', function(event, task){
+      self.taskName =  "";
+      self.description = "";
       self.toggleNewTask()
     })
     $scope.$on('editProj', function(event, proj){
       self.selected = proj;
       self.toggleEditProj()
     })
+
+    $scope.$on('editTask', function(event, task){
+      self.task = task;
+      self.taskName =  task.title;
+      self.description = task.description;
+      self.toggleEditTask();
+    })
+
+    this.delTask = function(){
+      $rootScope.$broadcast('delTask',  this.task);
+    }
+    this.focusTask = function(){
+      this.readonly = false;
+      angular.element(document.getElementById('taskTitle')).focus();
+    }
+    this.updateTask = function(){
+      console.log(this.taskName, this.description)
+      $rootScope.$broadcast('updateTask',  this.task, this.taskName, this.description);
+    }
   }
 
 }

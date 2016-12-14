@@ -75,9 +75,7 @@ md-list-item::before, md-list-item .md-list-item-inner::before{min-height: 38px;
 md-list-item.md-no-proxy, md-list-item .md-no-style{
   padding: 0 1.875em;
 }
-.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused, .md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover{
-  background-color: rgba(107, 107, 153, 1);
-}
+
 users-list{clear: both}
 md-list{ padding: 0;}
 md-list .md-button {
@@ -93,6 +91,7 @@ md-list .md-button {
   position: relative;
   font-size: .9em;
 }
+md-list .md-button span{word-wrap:break-word;}
 md-list .md-button.selected {background-color: rgba(107, 107, 153, 1);}
 md-list .md-button span.col,
 md-list span.proj-col {
@@ -198,6 +197,7 @@ md-toolbar h1 {
 .task-in{
   position: relative;
   padding: 1.45em 6.3em;
+  word-wrap:break-word;
 }
 .task-in:first-child ~ div:after{
   position: absolute; top: 0; left: 3.75em; right: 3.75em;
@@ -336,13 +336,16 @@ md-toolbar .close{
 }
 md-toolbar .close:before{font-family: "Test--front-end";content: "\f105"; display: block; font-size: 1.3em;}
 md-toolbar .close:after{content: 'ESC'; display: block; font-size: .5em;}
-md-toolbar .edite{
-  position: absolute; top: 1.6em; right: 3.7em;
+.edite{
+  position: absolute; 
+  // top: 1.6em; right: 3.7em;
+  top:50%; right: 1em; margin-top: -.5em; display: none;
   color: #51555e;
   cursor: pointer;
   outline: none;
 }
-md-toolbar .edite:before{font-family: "Test--front-end";content: "\f106"; display: block; font-size: 1em;}
+.edite:before{font-family: "Test--front-end";content: "\f106"; display: block; font-size: 1em;}
+.task-in:hover .edite, .task-in:active .edite{display: block;}
 
 md-toolbar .delete{
   position: absolute; top: 1.6em; right: 1.6em;
@@ -405,23 +408,3 @@ search {
   position: relative;
 }
 .md-button{white-space: normal;}
-.md-open-menu-container{
-    margin-top: 2.7em;
-    margin-left: .5em;
-}
-md-menu-content{padding: 1em 0; background: #f7f7f7;border:1px solid #bdbdbd; border-top: none;}
-md-icon{height: auto;}
-md-menu-item > .md-button md-icon:after{
-  font-family: "Test--front-end";
-  content: "\f106"; 
-  font-size: 1em;
-}
-md-menu-item > .md-button.md-focused md-icon:after,
-md-menu-item > .md-button:hover md-icon:after{color: #fff;}
-.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused, .md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover{
-  background: #6b6b99; color: #fff;
-}
-md-menu-item .md-button{
-  margin: 0 .5em;
-  border-radius: 3px;
-}
